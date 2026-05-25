@@ -2,7 +2,6 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        // Tu programa de prueba escrito en el subconjunto simplificado de Java
         String code = 
             "int contador;\n" +
             "double pi;\n" +
