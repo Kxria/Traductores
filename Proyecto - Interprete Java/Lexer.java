@@ -14,6 +14,7 @@ public class Lexer {
         KEYWORDS.put("if", Token.Type.IF);
         KEYWORDS.put("else", Token.Type.ELSE);
         KEYWORDS.put("while", Token.Type.WHILE);
+        KEYWORDS.put("for", Token.Type.FOR);
     }
 
     public Lexer(String input) {
@@ -75,7 +76,7 @@ public class Lexer {
                 continue;
             }
 
-            System.err.println("Error léxico en línea " + line + ": Carácter inválido '" + c + "'");
+            System.err.println("Error en linea: " + line + ": caracter invalido '" + c + "'");
             pos++;
         }
 
@@ -185,7 +186,14 @@ public class Lexer {
                 if (next == '=') { pos += 2; return new Token(Token.Type.MAYOR_IGUAL, ">=", line); }
                 pos++; return new Token(Token.Type.MAYOR, ">", line);
 
-            case '+': pos++; return new Token(Token.Type.MAS, "+", line);
+            case '+':
+                if (pos + 1 < input.length() && input.charAt(pos + 1) == '+') {
+                    pos += 2;
+                    return new Token(Token.Type.INCREMENTO, "++", line);
+                }
+                pos++;
+                return new Token(Token.Type.MAS, "+", line);
+
             case '-': pos++; return new Token(Token.Type.MENOS, "-", line);
             case '*': pos++; return new Token(Token.Type.MULT, "*", line);
             case '/': pos++; return new Token(Token.Type.DIV, "/", line);

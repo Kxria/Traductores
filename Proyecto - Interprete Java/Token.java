@@ -4,6 +4,8 @@ public class Token {
         INT, DOUBLE, STRING,
         IF, ELSE, WHILE,
         SYSTEM_OUT_PRINTLN,
+        FOR, 
+        INCREMENTO,
 
         // Literales / Ids
         IDENTIFICADOR,
