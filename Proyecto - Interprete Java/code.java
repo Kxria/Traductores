@@ -20,6 +20,6 @@ public class code {
             System.out.println("El promedio es menor o igual a 3");
         }
 
-        System.out.println("Hola Chiggas!");
+        System.out.println("Hello World!");
     }
 }
