@@ -9,11 +9,8 @@ public class Main {
             System.out.println("============ Analisis lexico ============");
             Lexer lexer = new Lexer(code);
             List<Token> tokens = lexer.tokenize();
-            for (Token token : tokens) {
-                System.out.println(token);
-            }
-            System.out.println("Tokens detectados: " + tokens.size() + "\n");
 
+            System.out.println("============ Parser ============");
             TablaSimbolos ts = new TablaSimbolos();
             Parser parser = new Parser(tokens, ts);
             parser.analizar();
