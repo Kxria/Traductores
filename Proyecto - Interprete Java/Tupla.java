@@ -1,3 +1,8 @@
+// Proyecto Final - Interprete de lenguaje de programacion Java
+// Traductores - 361
+// 2200357 - Chaparro Herrera Hugo Giovanni
+// 2200073 - Rivera Vazquez Hugo Alexis
+
 public abstract class Tupla {
     protected int saltoVerdadero;
     protected int saltoFalso;

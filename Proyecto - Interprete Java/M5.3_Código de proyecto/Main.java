@@ -1,3 +1,8 @@
+// Proyecto Final - Interprete de lenguaje de programacion Java
+// Traductores - 361
+// 2200357 - Chaparro Herrera Hugo Giovanni
+// 2200073 - Rivera Vazquez Hugo Alexis
+
 import java.util.List;
 import java.nio.file.*;
 
@@ -9,8 +14,11 @@ public class Main {
             System.out.println("============ Analisis lexico ============");
             Lexer lexer = new Lexer(code);
             List<Token> tokens = lexer.tokenize();
+            for (Token token : tokens) {
+                System.out.println(token);
+            }
+            System.out.println("Tokens detectados: " + tokens.size() + "\n");
 
-            System.out.println("============ Parser ============");
             TablaSimbolos ts = new TablaSimbolos();
             Parser parser = new Parser(tokens, ts);
             parser.analizar();
