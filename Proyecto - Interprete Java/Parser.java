@@ -32,15 +32,40 @@ public class Parser {
 
     private int siguiente() { return tuplas.size(); }
 
-    // Punto de entrada del Parser
     public void analizar() {
-        parseEnunciados();
+        if (check(Token.Type.PUBLIC) || check(Token.Type.CLASS)) {
+            
+            if (match(Token.Type.PUBLIC)) {
+                expect(Token.Type.CLASS);
+            } else {
+                expect(Token.Type.CLASS);
+            }
+            expect(Token.Type.IDENTIFICADOR);
+            expect(Token.Type.LBRACE);
+
+            expect(Token.Type.PUBLIC);
+            expect(Token.Type.STATIC);
+            expect(Token.Type.VOID);
+            expect(Token.Type.MAIN);
+            expect(Token.Type.LPAREN);
+            expect(Token.Type.STRING);
+            expect(Token.Type.LBRACKET);
+            expect(Token.Type.RBRACKET);
+            expect(Token.Type.IDENTIFICADOR);
+            expect(Token.Type.RPAREN);
+            expect(Token.Type.LBRACE);
+
+            parseEnunciados();
+            expect(Token.Type.RBRACE);
+            expect(Token.Type.RBRACE);
+        } else {
+            parseEnunciados();
+        }
+
         expect(Token.Type.EOF);
-        // Añadimos la tupla de fin al terminar el archivo
-        tuplas.add(new TuplaFin()); 
+        tuplas.add(new TuplaFin());
     }
 
-    // Procesa un bloque de enunciados hasta un cierre de llave '}' o fin de archivo
     private void parseEnunciados() {
         while (!check(Token.Type.RBRACE) && !check(Token.Type.EOF)) {
             parseEnunciado();

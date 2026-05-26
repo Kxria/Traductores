@@ -2,14 +2,14 @@ import java.util.List;
 import java.nio.file.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        String code = Files.readString(Paths.get("code.java"));;
-
+    public static void main(String[] args) {
         try {
+            String code = Files.readString(Paths.get("code.java"));
+
             System.out.println("============ Analisis lexico ============");
             Lexer lexer = new Lexer(code);
             List<Token> tokens = lexer.tokenize();
-            
+
             System.out.println("============ Parser ============");
             TablaSimbolos ts = new TablaSimbolos();
             Parser parser = new Parser(tokens, ts);
@@ -27,16 +27,10 @@ public class Main {
                 i++;
             }
 
-            System.out.println("\n============ Tabla de símbolos ============");
-            for (Variable v : ts.getSimbolos()) {
-                System.out.println("  " + v);
-            }
-
             System.out.println("\n============ Ejecucion del programa ============");
             PseudoInterprete interprete = new PseudoInterprete(parser.getTuplas(), ts);
             interprete.ejecutar();
-            
-        } catch (Exception e) {
+        } catch(Exception e) {
             System.err.println("\nError durante el proceso: " + e.getMessage());
             e.printStackTrace();
         }

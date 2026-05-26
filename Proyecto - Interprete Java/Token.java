@@ -1,11 +1,13 @@
 public class Token {
     public enum Type {
-        // Keywords
+        // Keywords existentes
         INT, DOUBLE, STRING,
         IF, ELSE, WHILE,
         SYSTEM_OUT_PRINTLN,
         FOR, 
         INCREMENTO,
+
+        PUBLIC, CLASS, STATIC, VOID, MAIN,
 
         // Literales / Ids
         IDENTIFICADOR,
@@ -34,6 +36,8 @@ public class Token {
         LBRACE, RBRACE, // { }
         PUNTO_COMA,     // ;
         COMA,           // ,
+
+        LBRACKET, RBRACKET, // [ ]
 
         // EOF
         EOF

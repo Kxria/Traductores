@@ -25,7 +25,7 @@ public class LexerTester {
         try {
             // tokenize code
             java.util.List<Token> listaTokens = lexer.tokenize();
-            
+
             // print generated tokens
             System.out.println("\n--- Tokens ---");
             for (Token t : listaTokens) {

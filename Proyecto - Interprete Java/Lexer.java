@@ -7,7 +7,7 @@ public class Lexer {
 
     private static final Map<String, Token.Type> KEYWORDS = new LinkedHashMap<>();
     static {
-        // Keyword assign
+        // Keywords
         KEYWORDS.put("int", Token.Type.INT);
         KEYWORDS.put("double", Token.Type.DOUBLE);
         KEYWORDS.put("String", Token.Type.STRING);
@@ -15,6 +15,11 @@ public class Lexer {
         KEYWORDS.put("else", Token.Type.ELSE);
         KEYWORDS.put("while", Token.Type.WHILE);
         KEYWORDS.put("for", Token.Type.FOR);
+        KEYWORDS.put("public", Token.Type.PUBLIC);
+        KEYWORDS.put("class", Token.Type.CLASS);
+        KEYWORDS.put("static", Token.Type.STATIC);
+        KEYWORDS.put("void", Token.Type.VOID);
+        KEYWORDS.put("main", Token.Type.MAIN);
     }
 
     public Lexer(String input) {
@@ -90,7 +95,7 @@ public class Lexer {
 
             if (c == ' ' || c == '\t') {
                 pos++;
-            } // Comentarios
+            }
             else if (c == '/' && pos + 1 < input.length() && input.charAt(pos + 1) == '/') {
                 while (pos < input.length() && input.charAt(pos) != '\n') {
                     pos++;
@@ -109,7 +114,6 @@ public class Lexer {
             pos++;
         }
 
-        // Real == double
         if (pos < input.length() && input.charAt(pos) == '.') {
             isReal = true;
             pos++;
@@ -168,7 +172,6 @@ public class Lexer {
     private Token readOperator() {
         char c = input.charAt(pos);
         char next = (pos + 1 < input.length()) ? input.charAt(pos + 1) : '\0';
-
         switch (c) {
             case '=':
                 if (next == '=') { pos += 2; return new Token(Token.Type.IGUAL_IGUAL, "==", line); }
@@ -177,7 +180,6 @@ public class Lexer {
             case '!':
                 if (next == '=') { pos += 2; return new Token(Token.Type.DIFERENTE, "!=", line); }
                 break;
-
             case '<':
                 if (next == '=') { pos += 2; return new Token(Token.Type.MENOR_IGUAL, "<=", line); }
                 pos++; return new Token(Token.Type.MENOR, "<", line);
@@ -188,11 +190,9 @@ public class Lexer {
 
             case '+':
                 if (pos + 1 < input.length() && input.charAt(pos + 1) == '+') {
-                    pos += 2;
-                    return new Token(Token.Type.INCREMENTO, "++", line);
+                    pos += 2; return new Token(Token.Type.INCREMENTO, "++", line);
                 }
-                pos++;
-                return new Token(Token.Type.MAS, "+", line);
+                pos++; return new Token(Token.Type.MAS, "+", line);
 
             case '-': pos++; return new Token(Token.Type.MENOS, "-", line);
             case '*': pos++; return new Token(Token.Type.MULT, "*", line);
@@ -200,6 +200,8 @@ public class Lexer {
             case '%': pos++; return new Token(Token.Type.MOD, "%", line);
             case '(': pos++; return new Token(Token.Type.LPAREN, "(", line);
             case ')': pos++; return new Token(Token.Type.RPAREN, ")", line);
+            case '[': pos++; return new Token(Token.Type.LBRACKET, "[", line);
+            case ']': pos++; return new Token(Token.Type.RBRACKET, "]", line);
             case '{': pos++; return new Token(Token.Type.LBRACE, "{", line);
             case '}': pos++; return new Token(Token.Type.RBRACE, "}", line);
             case ',': pos++; return new Token(Token.Type.COMA, ",", line);
